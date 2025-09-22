@@ -1,30 +1,356 @@
-// Smooth Scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function(e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth"
-    });
-  });
-});
+/* ==== GLOBAL ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #000000;
+  color: white;
+  line-height: 1.6;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+section {
+  padding: 60px 10%;
+}
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+h2 span {
+  color: #00bfff;
+}
 
-// Contact Form Submission (demo only)
-document.querySelector("form").addEventListener("submit", function(e) {
-  e.preventDefault();
-  alert("Message Sent Successfully!");
-  this.reset();
-});
+/* ==== HEADER ==== */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: #0a1629;
+  padding: 15px 10%;
+  z-index: 100;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+.nav-links li {
+  list-style: none;
+}
+.nav-links a:hover {
+  color: #00bfff;
+}
 
-// Section fade-in on scroll
-document.querySelectorAll("section").forEach(section => {
-  function revealSection() {
-    const rect = section.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 50) {
-      section.classList.add("visible");
-    }
+/* Header socials beside nav */
+.socials-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.socials-header img {
+  width: 28px;
+  border-radius: 5px;
+  transition: box-shadow 0.2s;
+}
+.socials-header img:hover {
+  box-shadow: 0 0 8px #00bfff;
+}
+
+/* ==== HOME ==== */
+.home {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 100px; /* Add space for the fixed header */
+}
+.home-content h1 {
+  font-size: 2.5rem;
+}
+.home-content span {
+  color: #00bfff;
+}
+.home-content .btn-box {
+  margin-top: 20px;
+}
+.btn {
+  display: inline-block;
+  background: #00bfff;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: #008fcc;
+}
+.socials {
+  margin-top: 20px;
+}
+.socials img {
+  width: 30px;
+  margin: 0 10px;
+}
+
+/* Responsive header improvements */
+@media (max-width: 900px) {
+  nav {
+    flex-wrap: wrap;
   }
+  .socials-header {
+    margin-top: 10px;
+  }
+}
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .socials-header {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+}
 
-  window.addEventListener("scroll", revealSection);
-  // Initial check in case the section is already in view
-  revealSection();
-});
+/* For smaller screens, adjust the padding */
+@media (max-width: 600px) {
+  .home {
+    padding-top: 120px;
+  }
+}
+
+/* ==== ABOUT ==== */
+.about-content {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+.about-content img {
+  width: 200px;
+  border-radius: 50%;
+}
+
+/* ==== EDUCATION ==== */
+.edu-exp {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+.column {
+  flex: 1;
+}
+.box {
+  border: 1px solid #00bfff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+/* ==== SKILLS ==== */
+.skills-container {
+  display: flex;
+  gap: 50px;
+}
+.skills-box {
+  flex: 1;
+}
+.bar {
+  width: 100%;
+  height: 10px;
+  background: #333;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.bar div {
+  height: 100%;
+  background: #00bfff;
+  border-radius: 5px;
+}
+
+/* ==== CONTACT ==== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+form input, form textarea {
+  padding: 10px;
+  border: 1px solid #00bfff;
+  border-radius: 5px;
+  background: transparent;
+  color: white;
+}
+form button {
+  align-self: center;
+  cursor: pointer;
+}
+
+/* ==== SMOOTH SCROLL ==== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ==== TEXT LIGHTING EFFECT ==== */
+/* Remove text-shadow from headings and logo */
+h1, h2, h3, .logo {
+  text-shadow: none;
+}
+
+/* Remove extra glow from highlighted span */
+h1 span, h2 span {
+  text-shadow: none;
+}
+
+/* Button glow effect */
+.btn {
+  box-shadow: 0 0 10px #00bfff, 0 0 20px #008fcc;
+}
+
+/* Section fade-in animation */
+section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== MY WORKS SECTION STYLES ===== */
+.works-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.work-item {
+  background: #111;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  width: 220px;
+  box-shadow: 0 0 10px #00bfff44;
+  transition: transform 0.3s;
+}
+.work-item img {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Responsive for works section */
+@media (max-width: 900px) {
+  .works-gallery {
+    gap: 20px;
+  }
+  .work-item {
+    width: 45%;
+    max-width: 250px;
+  }
+}
+@media (max-width: 600px) {
+  .works-gallery {
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+  }
+  .work-item {
+    width: 90%;
+    max-width: 350px;
+  }
+  .work-item img {
+    max-width: 100%;
+  }
+}
+
+/* ==== RESPONSIVE DESIGN ==== */
+@media (max-width: 900px) {
+  section {
+    padding: 40px 5%;
+  }
+  header {
+    padding: 10px 5%;
+  }
+  .home {
+    flex-direction: column;
+    text-align: center;
+    min-height: auto;
+    padding-top: 80px;
+  }
+  .home-img img {
+    width: 150px;
+    margin-top: 20px;
+  }
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-content img {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  .edu-exp, .skills-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .nav-links {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  h1, h2 {
+    font-size: 1.5rem;
+  }
+  .logo {
+    font-size: 1.2rem;
+  }
+  .home-content h1 {
+    font-size: 1.2rem;
+  }
+  .btn {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+  .socials img {
+    width: 24px;
+    margin: 0 6px;
+  }
+  .about-content img,
+  .home-img img {
+    width: 100px;
+  }
+  form input, form textarea {
+    font-size: 0.9rem;
+  }
+  .box {
+    padding: 10px;
+  }
+}
+
+/* ==== FOOTER ==== */
+.footer {
+  text-align: center;
+  padding: 18px 0;
+  background: #0a1629;
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 40px;
+}
